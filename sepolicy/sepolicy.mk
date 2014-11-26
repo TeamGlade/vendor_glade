@@ -18,6 +18,7 @@ BOARD_SEPOLICY_UNION += \
     healthd.te \
     installd.te \
     netd.te \
+    su.te \
     sysinit.te \
     system.te \
     ueventd.te \
