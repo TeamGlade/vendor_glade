@@ -89,6 +89,11 @@ PRODUCT_COPY_FILES += \
 PRODUCT_COPY_FILES += \
     vendor/glade/prebuilt/common/etc/init.d/90userinit:system/etc/init.d/90userinit
 
+# SuperSU
+PRODUCT_COPY_FILES += \
+    vendor/glade/prebuilt/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+    vendor/glade/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+
 # Glade-specific init file
 PRODUCT_COPY_FILES += \
     vendor/glade/prebuilt/common/etc/init.local.rc:root/init.glade.rc
