@@ -47,6 +47,11 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bin/backuptool.functions:system/bin/backuptool.functions \
     $(LOCAL_PATH)/bin/backuptool.sh:system/bin/backuptool.sh
 
+# SuperSU
+PRODUCT_COPY_FILES += \
+    vendor/glade/prebuilts/common/system/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+    vendor/glade/prebuilts/common/system/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+
 # Bootanimation support
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/bootanimation.zip:system/media/bootanimation.zip
