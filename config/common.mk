@@ -218,6 +218,9 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
 # Glade Versioning System
 -include vendor/glade/config/versions.mk
 
+
+-include vendor/cm/config/sm.mk
+
 -include $(WORKSPACE)/build_env/image-auto-bits.mk
 
 -include vendor/cyngn/product.mk
