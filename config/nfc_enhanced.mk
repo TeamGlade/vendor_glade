@@ -1,3 +1,3 @@
-# This device supports CM enhanced NFC
+# This device supports Glade enhanced NFC
 PRODUCT_COPY_FILES += \
-    vendor/cm/config/permissions/com.cyanogenmod.nfc.enhanced.xml:system/etc/permissions/com.cyanogenmod.nfc.enhanced.xml
+    vendor/glade/config/permissions/com.glade.nfc.enhanced.xml:system/etc/permissions/com.glade.nfc.enhanced.xml
