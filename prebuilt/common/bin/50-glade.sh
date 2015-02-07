@@ -1,7 +1,7 @@
 #!/sbin/sh
-# 
-# /system/addon.d/50-cm.sh
-# During a CM12.1 upgrade, this script backs up /system/etc/hosts,
+#
+# /system/addon.d/50-glade.sh
+# During a Glade upgrade, this script backs up /system/etc/hosts,
 # /system is formatted and reinstalled, then the file is restored.
 #
 
