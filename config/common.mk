@@ -148,7 +148,6 @@ PRODUCT_PACKAGES += \
 # Extra tools in Glade
 PRODUCT_PACKAGES += \
     libsepol \
-    openvpn \
     e2fsck \
     mke2fs \
     tune2fs \
