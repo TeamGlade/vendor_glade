@@ -29,9 +29,9 @@ endif
 
 # Set GLADE version
 ifdef GLADE_RELEASE
-    GLADE_VERSION := "Glade-Lollipop-v"$(VERSION) 
+    GLADE_VERSION := Glade-Lollipop-v$(VERSION) 
 else
-    GLADE_VERSION := "Glade-v$(VERSION)-$(GLADE_BUILD)-$(GLADE_BUILDTYPE)"-$(shell date +%Y%m%d-%H%M)
+    GLADE_VERSION := Glade-v$(VERSION)-$(GLADE_BUILD)-$(GLADE_BUILDTYPE)-$(shell date +%Y%m%d-%H%M)
 endif
 
 GLADE_DISPLAY_VERSION := $(VERSION)
