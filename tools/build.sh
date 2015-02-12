@@ -1,8 +1,16 @@
 usage()
 {
     echo -e ""
+    echo -e ${txtbld}${red}"Welcome To Glade ROM"${txtrst}
+    echo -e ${txtbld}${red}"Thanks For Choosing Our ROM"${txtrst}
+    echo -e ${txtbld}${red}"Below You Can See Our Build Script Functions"${txtrst}
+    echo -e ${txtbld}${red}"If You Get Your Build Successful, Don't Forget To Contact Us For Official Support"${txtrst}
+    echo -e ""
+    echo -e ${txtbld}${red}"Important Note : Brunch Is Default In This Script, If You Like Lunch Command Then Just Add -l Like Given In Example"${txtrst}
+    echo -e ${txtbld}${red}"Good Day"${txtrst}
+    echo -e ""
     echo -e ${txtbld}"Usage:"${txtrst}
-    echo -e "  buildsh [options] device"
+    echo -e "  build.sh [options] device"
     echo -e ""
     echo -e ${txtbld}"  Options:"${txtrst}
     echo -e "    -c# Cleanin options before build:"
@@ -10,11 +18,13 @@ usage()
     echo -e "        2 - make dirty"
     echo -e "        3 - make magic"
     echo -e "        4 - make kernelclean"
+    echo -e "    -l Lunch"
+    echo -e "    -h CCACHE"
     echo -e "    -j# Set jobs"
     echo -e "    -s  Sync before build"
     echo -e ""
     echo -e ${txtbld}"  Example:"${txtrst}
-    echo -e "    bash build.sh -c1 -s -j8 hammerhead"
+    echo -e "    bash build.sh -c1 -j8 -l hammerhead"
     echo -e ""
     exit 1
 }
@@ -90,12 +100,17 @@ opt_jobs="$OPT_CPUS"
 opt_sync=0
 opt_pipe=0
 opt_verbose=0
+opt_brunch=0
+opt_lunch=0
+opt_ccache=0
 
-while getopts "c:j:s" opt; do
+while getopts "c:j:s:l:h" opt; do
     case "$opt" in
     c) opt_clean="$OPTARG" ;;
     j) opt_jobs="$OPTARG" ;;
     s) opt_sync=1 ;;
+    l) opt_lunch=1 ;;
+    h) opt_ccache=1 ;;
     *) usage
     esac
 done
@@ -157,10 +172,27 @@ export USE_HOST_4_8=true
 export USE_PREBUILT_CHROMIUM=1
 export GRAPHITE_OPTS=true
 
-# lunch device
-echo -e ""
-echo -e ${grn}"Compiling ROM"${txtrst}
-lunch "glade_$device-user"&& make otapackage "-j$opt_jobs";
+# CCACHE
+if [ "$opt_ccache" -eq 0 ]; then
+    echo -e ""
+    echo -e ${cya}"Using CCAHCE"${txtrst}
+    export USE_CCACHE=1
+    export CCACHE_NLEVELS=4
+    ./prebuilts/misc/linux-x86/ccache/ccache -M 50G
+    echo -e ""
+fi
+
+# Compiling
+if [ "$opt_lunch" -ne 0 ]; then
+    echo -e ""
+    echo -e ${cya}"Lunching Device"${txtrst}
+    lunch "glade_$device-userdebug"&& make "-j$opt_jobs"
+    echo -e ""
+else
+    echo -e ""
+    echo -e ${cya}"Brunch Device"${txtrst}
+    brunch "$device";
+fi
 
 # finished? get elapsed time
 t2=$($DATE +%s)
