@@ -209,11 +209,6 @@ PRODUCT_PACKAGE_OVERLAYS += vendor/glade/overlay/common
 # by default, do not update the recovery with system updates
 PRODUCT_PROPERTY_OVERRIDES += persist.sys.recovery_update=false
 
-# SuperSU
-PRODUCT_COPY_FILES += \
-    vendor/glade/prebuilt/common/etc/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-    vendor/glade/prebuilt/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
-    
 # Glade Versioning System
 -include vendor/glade/config/versions.mk
 
