@@ -91,7 +91,6 @@ else
 fi
 
 export OPT_CPUS=$(bc <<< "($CPUS-1)*2")
-export USE_CCACHE=1
 
 opt_clean=0
 opt_dex=0
@@ -100,11 +99,10 @@ opt_jobs="$OPT_CPUS"
 opt_sync=0
 opt_pipe=0
 opt_verbose=0
-opt_brunch=0
 opt_lunch=0
 opt_ccache=0
 
-while getopts "c:j:s:l:h" opt; do
+while getopts "c:j:s:h:l" opt; do
     case "$opt" in
     c) opt_clean="$OPTARG" ;;
     j) opt_jobs="$OPTARG" ;;
@@ -173,11 +171,11 @@ export USE_PREBUILT_CHROMIUM=1
 export GRAPHITE_OPTS=true
 
 # CCACHE
-if [ "$opt_ccache" -eq 0 ]; then
+if [ "$opt_ccache" -ne 0 ]; then
     echo -e ""
     echo -e ${cya}"Using CCAHCE"${txtrst}
-    export USE_CCACHE=1
-    export CCACHE_NLEVELS=4
+     USE_CCACHE=1
+     CCACHE_NLEVELS=4
     ./prebuilts/misc/linux-x86/ccache/ccache -M 50G
     echo -e ""
 fi
