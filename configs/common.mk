@@ -1,6 +1,36 @@
 # Brand
 PRODUCT_BRAND ?= glade
 
+ifneq ($(TARGET_SCREEN_WIDTH) $(TARGET_SCREEN_HEIGHT),$(space))
+
+# determine the smaller dimension
+TARGET_BOOTANIMATION_SIZE := $(shell \
+  if [ $(TARGET_SCREEN_WIDTH) -lt $(TARGET_SCREEN_HEIGHT) ]; then \
+    echo $(TARGET_SCREEN_WIDTH); \
+  else \
+    echo $(TARGET_SCREEN_HEIGHT); \
+  fi )
+
+# get a sorted list of the sizes
+bootanimation_sizes := $(subst .zip,, $(shell ls vendor/glade/prebuilts/common/system/bootanimation))
+bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
+
+# find the appropriate size and set
+define check_and_set_bootanimation
+$(eval TARGET_BOOTANIMATION_NAME := $(shell \
+  if [ -z "$(TARGET_BOOTANIMATION_NAME)" ]; then
+    if [ $(1) -le $(TARGET_BOOTANIMATION_SIZE) ]; then \
+      echo $(1); \
+      exit 0; \
+    fi;
+  fi;
+  echo $(TARGET_BOOTANIMATION_NAME); ))
+endef
+$(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
+
+PRODUCT_BOOTANIMATION := vendor/glade/prebuilts/common/system/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
+endif
+
 # Local path for prebuilts
 LOCAL_PATH:= vendor/glade/prebuilts/common/system
 
@@ -63,10 +93,6 @@ PRODUCT_COPY_FILES += \
 # World APN list
 PRODUCT_COPY_FILES += \
     vendor/glade/prebuilts/common/system/etc/apns-conf.xml:system/etc/apns-conf.xml
-
-# Bootanimation support
-PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/media/bootanimation.zip:system/media/bootanimation.zip
 
 # Glade Versioning
 -include vendor/glade/configs/versions.mk
