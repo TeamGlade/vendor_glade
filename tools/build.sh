@@ -166,9 +166,8 @@ rm -f $OUTDIR/target/product/$device/system/framework/*.odex
 
 echo -e ""
 echo -e ${grn}"Starting Optimization"${txtrst}
-export USE_HOST_4_8=true
+export GLADIFY=true
 export USE_PREBUILT_CHROMIUM=1
-export GRAPHITE_OPTS=true
 
 # CCACHE
 if [ "$opt_ccache" -ne 0 ]; then
