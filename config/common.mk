@@ -139,6 +139,7 @@ PRODUCT_PACKAGES += \
     Eleven \
     LockClock \
     CMHome \
+    DashClock \
     CyanogenSetupWizard
 
 # Glade Hardware Abstraction Framework
