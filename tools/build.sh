@@ -22,6 +22,7 @@ usage()
     echo -e "    -h CCACHE"
     echo -e "    -j# Set jobs"
     echo -e "    -s  Sync before build"
+    echo -e "    -lr Optimizations for devices with low-RAM"
     echo -e ""
     echo -e ${txtbld}"  Example:"${txtrst}
     echo -e "    bash build.sh -c1 -j8 -l hammerhead"
@@ -101,14 +102,16 @@ opt_pipe=0
 opt_verbose=0
 opt_lunch=0
 opt_ccache=0
+opt_lrd=0
 
-while getopts "c:j:s:h:l" opt; do
+while getopts "c:j:s:h:l:lr" opt; do
     case "$opt" in
     c) opt_clean="$OPTARG" ;;
     j) opt_jobs="$OPTARG" ;;
     s) opt_sync=1 ;;
     l) opt_lunch=1 ;;
     h) opt_ccache=1 ;;
+    lr) opt_lrd=1 ;;
     *) usage
     esac
 done
@@ -151,6 +154,15 @@ if [ "$opt_sync" -ne 0 ]; then
 fi
 
 rm -f $OUTDIR/target/product/$device/obj/KERNEL_OBJ/.version
+
+# Lower RAM devices
+if [ "$opt_lrd" -ne 0 ]; then
+    echo -e ${bldblu}"Applying optimizations for devices with low RAM"${txtrst}
+    export GLADE_LOW_RAM_DEVICE=true
+    echo -e ""
+else
+    unset GLADE_LOW_RAM_DEVICE
+fi
 
 # get time of startup
 t1=$($DATE +%s)
