@@ -60,7 +60,7 @@ PRODUCT_PROPERTY_OVERRIDES += persist.sys.dun.override=0
 
 ifneq ($(TARGET_BUILD_VARIANT),eng)
 # Enable ADB authentication
-ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=1
+ADDITIONAL_DEFAULT_PROPERTIES += ro.adb.secure=0
 endif
 
 # Copy over the changelog to the device
@@ -139,8 +139,7 @@ PRODUCT_PACKAGES += \
     Eleven \
     LockClock \
     CMHome \
-    DashClock \
-    CyanogenSetupWizard
+    DashClock 
 
 # Glade Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
