@@ -139,7 +139,8 @@ PRODUCT_PACKAGES += \
     Eleven \
     LockClock \
     CMHome \
-    DashClock 
+    CMFileManager \
+    DashClock
 
 # Glade Hardware Abstraction Framework
 PRODUCT_PACKAGES += \
