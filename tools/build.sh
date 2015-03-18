@@ -6,7 +6,6 @@ usage()
     echo -e ${txtbld}${red}"Below You Can See Our Build Script Functions"${txtrst}
     echo -e ${txtbld}${red}"If You Get Your Build Successful, Don't Forget To Contact Us For Official Support"${txtrst}
     echo -e ""
-    echo -e ${txtbld}${red}"Important Note : Brunch Is Default In This Script, If You Like Lunch Command Then Just Add -l Like Given In Example"${txtrst}
     echo -e ${txtbld}${red}"Good Day"${txtrst}
     echo -e ""
     echo -e ${txtbld}"Usage:"${txtrst}
@@ -14,18 +13,14 @@ usage()
     echo -e ""
     echo -e ${txtbld}"  Options:"${txtrst}
     echo -e "    -c# Cleanin options before build:"
-    echo -e "        1 - make clobber"
-    echo -e "        2 - make dirty"
-    echo -e "        3 - make magic"
-    echo -e "        4 - make kernelclean"
-    echo -e "    -l Lunch"
+    echo -e "        1 - make clean"
+    echo -e "        2 - make clean && make clobber"
     echo -e "    -h CCACHE"
-    echo -e "    -j# Set jobs"
     echo -e "    -s  Sync before build"
-    echo -e "    -lr Optimizations for devices with low-RAM"
+    echo -e "    -l Optimizations for devices with low-RAM"
     echo -e ""
     echo -e ${txtbld}"  Example:"${txtrst}
-    echo -e "    bash build.sh -c1 -j8 -l hammerhead"
+    echo -e "    bash build.sh -c1 hammerhead"
     echo -e ""
     exit 1
 }
@@ -100,18 +95,16 @@ opt_jobs="$OPT_CPUS"
 opt_sync=0
 opt_pipe=0
 opt_verbose=0
-opt_lunch=0
 opt_ccache=0
 opt_lrd=0
 
-while getopts "c:j:s:h:l:lr" opt; do
+while getopts "c:j:s:h:l" opt; do
     case "$opt" in
     c) opt_clean="$OPTARG" ;;
     j) opt_jobs="$OPTARG" ;;
     s) opt_sync=1 ;;
-    l) opt_lunch=1 ;;
     h) opt_ccache=1 ;;
-    lr) opt_lrd=1 ;;
+    l) opt_lrd=1 ;;
     *) usage
     esac
 done
@@ -124,24 +117,13 @@ device="$1"
 echo -e ${cya}"Starting ${ppl}Glade..."${txtrst}
 
 if [ "$opt_clean" -eq 1 ]; then
-    make clean >/dev/null
-    echo -e ""
+    make clean
     echo -e ${grn}"Out is clean"${txtrst}
     echo -e ""
 elif [ "$opt_clean" -eq 2 ]; then
-    make dirty >/dev/null
+    make clean && make clobber
     echo -e ""
-    echo -e ${grn}"Out is dirty"${txtrst}
-    echo -e ""
-elif [ "$opt_clean" -eq 3 ]; then
-    make magic >/dev/null
-    echo -e ""
-    echo -e ${grn}"Enjoy your magical adventure"${txtrst}
-    echo -e ""
-elif [ "$opt_clean" -eq 4 ]; then
-    make kernelclean >/dev/null
-    echo -e ""
-    echo -e ${grn}"All kernel components have been removed"${txtrst}
+    echo -e ${grn}"Out is clean"${txtrst}
     echo -e ""
 fi
 
@@ -155,15 +137,6 @@ fi
 
 rm -f $OUTDIR/target/product/$device/obj/KERNEL_OBJ/.version
 
-# Lower RAM devices
-if [ "$opt_lrd" -ne 0 ]; then
-    echo -e ${bldblu}"Applying optimizations for devices with low RAM"${txtrst}
-    export GLADE_LOW_RAM_DEVICE=true
-    echo -e ""
-else
-    unset GLADE_LOW_RAM_DEVICE
-fi
-
 # get time of startup
 t1=$($DATE +%s)
 
@@ -176,10 +149,21 @@ rm -f $OUTDIR/target/product/$device/system/build.prop
 rm -f $OUTDIR/target/product/$device/system/app/*.odex
 rm -f $OUTDIR/target/product/$device/system/framework/*.odex
 
+# Optimisation
 echo -e ""
 echo -e ${grn}"Starting Optimization"${txtrst}
 export GLADIFY=true
 export USE_PREBUILT_CHROMIUM=1
+export TARGET_CUSTOM_TOOLCHAIN=4.8-sm
+
+# Lower RAM devices
+if [ "$opt_lrd" -ne 0 ]; then
+    echo -e ${bldblu}"Applying optimizations for devices with low RAM"${txtrst}
+    export GLADE_LOW_RAM_DEVICE=true
+    echo -e ""
+else
+    unset GLADE_LOW_RAM_DEVICE
+fi
 
 # CCACHE
 if [ "$opt_ccache" -ne 0 ]; then
@@ -192,16 +176,9 @@ if [ "$opt_ccache" -ne 0 ]; then
 fi
 
 # Compiling
-if [ "$opt_lunch" -ne 0 ]; then
-    echo -e ""
-    echo -e ${cya}"Lunching Device"${txtrst}
-    lunch "glade_$device-userdebug"&& make "-j$opt_jobs"
-    echo -e ""
-else
-    echo -e ""
-    echo -e ${cya}"Brunch Device"${txtrst}
-    brunch "$device";
-fi
+echo -e ""
+echo -e ${cya}"Brunch Device"${txtrst}
+brunch "$device";
 
 # finished? get elapsed time
 t2=$($DATE +%s)
