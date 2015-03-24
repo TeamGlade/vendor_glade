@@ -1,0 +1,5 @@
+[gerrit]
+host=gerrit.aogp-devs.com
+port=29418
+project=vendor_glade.git
+defaultbranch=5.1
