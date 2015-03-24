@@ -2,10 +2,10 @@
 $(call inherit-product, device/htc/flounder/full_flounder.mk)
 
 # Inherit common product files
-$(call inherit-product, vendor/simpleaosp/configs/common.mk)
+$(call inherit-product, vendor/glade/configs/common.mk)
 
 # Setup device specific product configuration
-PRODUCT_NAME := simpleaosp_flounder
+PRODUCT_NAME := glade_flounder
 PRODUCT_BRAND := google
 PRODUCT_DEVICE := shamu
 PRODUCT_MODEL := Nexus 9

@@ -2,10 +2,10 @@
 $(call inherit-product, device/asus/flo/full_flo.mk)
 
 # Inherit common product files
-$(call inherit-product, vendor/simpleaosp/configs/common.mk)
+$(call inherit-product, vendor/glade/configs/common.mk)
 
 # Setup device specific product configuration
-PRODUCT_NAME := simpleaosp_flo
+PRODUCT_NAME := glade_flo
 PRODUCT_BRAND := google
 PRODUCT_DEVICE := flo
 PRODUCT_MODEL := Nexus 7

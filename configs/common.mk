@@ -1,8 +1,8 @@
 # Brand
-PRODUCT_BRAND ?= simpleaosp
+PRODUCT_BRAND ?= glade
 
 # Local path for prebuilts
-LOCAL_PATH:= vendor/simpleaosp/prebuilts/common/system
+LOCAL_PATH:= vendor/glade/prebuilts/common/system
 
 # Common build prop overrides 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -22,7 +22,7 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.facelock.use_intro_anim=false
 
 # Common overlays
-PRODUCT_PACKAGE_OVERLAYS += vendor/simpleaosp/overlays/common
+PRODUCT_PACKAGE_OVERLAYS += vendor/glade/overlays/common
 
 # Needed Packages
 PRODUCT_PACKAGES += \
@@ -46,7 +46,7 @@ PRODUCT_COPY_FILES += \
 
 # Backuptool support
 PRODUCT_COPY_FILES += \
-    $(LOCAL_PATH)/addon.d/50-simpleaosp.sh:system/addon.d/50-simpleaosp.sh \
+    $(LOCAL_PATH)/addon.d/50-glade.sh:system/addon.d/50-glade.sh \
     $(LOCAL_PATH)/bin/backuptool.functions:system/bin/backuptool.functions \
     $(LOCAL_PATH)/bin/backuptool.sh:system/bin/backuptool.sh
 
