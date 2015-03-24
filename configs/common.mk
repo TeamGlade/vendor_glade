@@ -21,9 +21,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.facelock.est_max_time=600 \
     ro.facelock.use_intro_anim=false
 
-# Common overlays
-PRODUCT_PACKAGE_OVERLAYS += vendor/glade/overlays/common
-
 # Needed Packages
 PRODUCT_PACKAGES += \
 LockClock \
@@ -53,3 +50,9 @@ PRODUCT_COPY_FILES += \
 # Bootanimation support
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/bootanimation.zip:system/media/bootanimation.zip
+
+# Glade Versioning
+-include vendor/glade/configs/versions.mk
+
+# Common overlays
+PRODUCT_PACKAGE_OVERLAYS += vendor/glade/overlays/common
