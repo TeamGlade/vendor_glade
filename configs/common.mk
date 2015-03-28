@@ -26,6 +26,10 @@ PRODUCT_PACKAGES += \
 LockClock \
 Launcher3 \
 ScreenRecorder \
+Mms \
+Browser \
+Camera2 \
+MusicFX \
 libscreenrecorder
 
 # Proprietary latinime lib needed for swyping
