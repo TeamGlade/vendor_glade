@@ -56,6 +56,10 @@ PRODUCT_COPY_FILES += \
     vendor/glade/prebuilts/common/system/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
     vendor/glade/prebuilts/common/system/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 
+# World APN list
+PRODUCT_COPY_FILES += \
+    vendor/glade/prebuilts/common/system/etc/apns-conf.xml:system/etc/apns-conf.xml
+
 # Bootanimation support
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/media/bootanimation.zip:system/media/bootanimation.zip
