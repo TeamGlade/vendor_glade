@@ -25,12 +25,12 @@ PRODUCT_PROPERTY_OVERRIDES += \
 PRODUCT_PACKAGES += \
 LockClock \
 Launcher3 \
-ScreenRecorder \
 Mms \
 Browser \
 Camera2 \
 MusicFX \
-libscreenrecorder
+#libscreenrecorder
+#ScreenRecorder 
 
 # Proprietary latinime lib needed for swyping
 PRODUCT_COPY_FILES += \
