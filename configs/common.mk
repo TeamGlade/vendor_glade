@@ -51,6 +51,10 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/bin/backuptool.functions:system/bin/backuptool.functions \
     $(LOCAL_PATH)/bin/backuptool.sh:system/bin/backuptool.sh
 
+# Init file
+PRODUCT_COPY_FILES += \
+    vendor/glade/prebuilts/common/system/etc/init.local.rc:root/init.glade.rc
+
 # SuperSU
 PRODUCT_COPY_FILES += \
     vendor/glade/prebuilts/common/system/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
