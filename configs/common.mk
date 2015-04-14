@@ -58,7 +58,7 @@ Launcher3 \
 Mms \
 Browser \
 Camera2 \
-MusicFX \
+MusicFX 
 #libscreenrecorder
 #ScreenRecorder 
 
