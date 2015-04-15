@@ -51,17 +51,6 @@ PRODUCT_PROPERTY_OVERRIDES += \
     ro.facelock.est_max_time=600 \
     ro.facelock.use_intro_anim=false
 
-# Needed Packages
-PRODUCT_PACKAGES += \
-LockClock \
-Launcher3 \
-Mms \
-Browser \
-Camera2 \
-MusicFX 
-#libscreenrecorder
-#ScreenRecorder 
-
 # Proprietary latinime lib needed for swyping
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/lib/libjni_latinime.so:system/lib/libjni_latinime.so
@@ -93,6 +82,9 @@ PRODUCT_COPY_FILES += \
 # World APN list
 PRODUCT_COPY_FILES += \
     vendor/glade/prebuilts/common/system/etc/apns-conf.xml:system/etc/apns-conf.xml
+
+# Additional Packages
+-include vendor/glade/configs/packages.mk
 
 # Glade Versioning
 -include vendor/glade/configs/versions.mk
