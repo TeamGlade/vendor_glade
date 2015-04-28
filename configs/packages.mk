@@ -6,6 +6,6 @@ LockClock \
 Launcher3 \
 Mms \
 Browser \
-Camera2 \
-libscreenrecorder \
-ScreenRecorder 
+Camera2 
+#libscreenrecorder 
+#ScreenRecorder 
