@@ -12,7 +12,7 @@ TARGET_BOOTANIMATION_SIZE := $(shell \
   fi )
 
 # get a sorted list of the sizes
-bootanimation_sizes := $(subst .zip,, $(shell ls vendor/glade/prebuilts/common/system/bootanimation))
+bootanimation_sizes := $(subst .zip,, $(shell ls vendor/glade/prebuilts/common/bootanimation))
 bootanimation_sizes := $(shell echo -e $(subst $(space),'\n',$(bootanimation_sizes)) | sort -rn)
 
 # find the appropriate size and set
@@ -28,11 +28,11 @@ $(eval TARGET_BOOTANIMATION_NAME := $(shell \
 endef
 $(foreach size,$(bootanimation_sizes), $(call check_and_set_bootanimation,$(size)))
 
-PRODUCT_BOOTANIMATION := vendor/glade/prebuilts/common/system/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
+PRODUCT_BOOTANIMATION := vendor/glade/prebuilts/common/bootanimation/$(TARGET_BOOTANIMATION_NAME).zip
 endif
 
 # Local path for prebuilts
-LOCAL_PATH:= vendor/glade/prebuilts/common/system
+LOCAL_PATH:= vendor/glade/prebuilts/common
 
 # Common build prop overrides 
 PRODUCT_PROPERTY_OVERRIDES += \
@@ -72,16 +72,16 @@ PRODUCT_COPY_FILES += \
 
 # Init file
 PRODUCT_COPY_FILES += \
-    vendor/glade/prebuilts/common/system/etc/init.local.rc:root/init.glade.rc
+    vendor/glade/prebuilts/common/etc/init.local.rc:root/init.glade.rc
 
 # SuperSU
 PRODUCT_COPY_FILES += \
-    vendor/glade/prebuilts/common/system/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
-    vendor/glade/prebuilts/common/system/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
+    vendor/glade/prebuilts/common/UPDATE-SuperSU.zip:system/addon.d/UPDATE-SuperSU.zip \
+    vendor/glade/prebuilts/common/etc/init.d/99SuperSUDaemon:system/etc/init.d/99SuperSUDaemon
 
 # World APN list
 PRODUCT_COPY_FILES += \
-    vendor/glade/prebuilts/common/system/etc/apns-conf.xml:system/etc/apns-conf.xml
+    vendor/glade/prebuilts/common/etc/apns-conf.xml:system/etc/apns-conf.xml
 
 # Additional Packages
 -include vendor/glade/configs/packages.mk
